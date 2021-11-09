@@ -17,7 +17,7 @@
                 "\\Georgie\\Module\\LaravelServiceProvider"
             ],
             "aliases": {
-                "HDModule": "\\Georgie\\Module\\Factory"
+                "GModule": "\\Georgie\\Module\\Factory"
             }
         }
     },
@@ -31,12 +31,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Houdunwang\\Module\\": "src/"
+            "Georgie\\Module\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "houdunwang\\Module\\Tests\\": "tests/"
+            "georgie\\Module\\Tests\\": "tests/"
         }
     }
 }
