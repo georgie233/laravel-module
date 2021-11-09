@@ -1,10 +1,10 @@
 {
-    "name": "houdunwang/laravel-module",
+    "name": "georgie/laravel-module",
     "description": "laravel modules",
     "license": "MIT",
     "authors": [
         {
-            "name": "houdunwang",
+            "name": "georgie",
             "email": "2300071698@qq.com"
         }
     ],
