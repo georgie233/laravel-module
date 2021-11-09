@@ -14,10 +14,10 @@
         },
         "laravel": {
             "providers": [
-                "\\Houdunwang\\Module\\LaravelServiceProvider"
+                "\\Georgie\\Module\\LaravelServiceProvider"
             ],
             "aliases": {
-                "HDModule": "\\Houdunwang\\Module\\Factory"
+                "HDModule": "\\Georgie\\Module\\Factory"
             }
         }
     },
