@@ -3,7 +3,7 @@
 /public/storage
 /storage/*.key
 /vendor
-/houdunwang
+/georgie
 /.idea
 /public/uploads
 /.vscode
