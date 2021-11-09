@@ -1,5 +1,6 @@
 @extends('admin::layouts.master')
 @section('content')
+
     <div class="card" id="app">
         <div class="card-header">{MODEL_TITLE}管理</div>
         <ul role="tablist" class="nav nav-tabs">
