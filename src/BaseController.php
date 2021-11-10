@@ -10,7 +10,9 @@ class BaseController extends Controller
     protected $isAjax = false;
     public function __construct()
     {
-        if (request()->ajax()){
+        $h = request()->header('Accept');
+
+        if (request()->expectsJson()){
             $this->isAjax = true;
         }
     }

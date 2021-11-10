@@ -2,9 +2,9 @@
 
 通过使用模块来管理大型Laravel项目，模块就像一个laravel包非常方便的进行添加或移除。
 
-这个包是在 [houdunwang/laravel-modules](https://github.com/houdunwang/laravel-module) 的基础上进行二次开发，（目的是个人使用）。
+这个包是在 [houdunwang/laravel-modules](https://github.com/houdunwang/laravel-module) 的基础上进行二次开发，（用于个人使用）。
 
- [houdunwang/laravel-modules](https://github.com/houdunwang/laravel-module) 模块是在 [nwidart.com/laravel-modules](https://nwidart.com/laravel-modules/v3/advanced-tools/artisan-commands) 和  [laravel-permission](https://github.com/spatie/laravel-permission#installation)  组件基础上扩展了一些功能，所以需要先安装laravel-module，laravel-permission这两个组件。
+[houdunwang/laravel-modules](https://github.com/houdunwang/laravel-module) 模块是在 [nwidart.com/laravel-modules](https://nwidart.com/laravel-modules/v3/advanced-tools/artisan-commands) 和  [laravel-permission](https://github.com/spatie/laravel-permission#installation)  组件基础上扩展了一些功能，所以需要先安装laravel-module，laravel-permission这两个组件。
 
 > laravel-modules 和 laravel-permission 组件的功能都可以正常使用
 
@@ -19,7 +19,7 @@
     php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider" --tag="config"
     
     php artisan vendor:publish --provider="Georgie\Module\LaravelServiceProvider"
-    
+
 
 配置 composer.json 设置自动加载目录
 
@@ -32,12 +32,18 @@
       }
     }
 
+配置 Kernel.php
+
+    'api' => [
+        \App\Http\Middleware\AcceptHeader::class,
+    ],
+
 ## 创建模块
 
 下面的命令是安装 `Admin` 模块
 
 ```
-php artisan g:module Admin
+php artisan hd:module Admin
 ```
 创建模块会同时执行以下操作：
 
@@ -49,7 +55,7 @@ php artisan g:module Admin
 新建模块时系统会自动创建配置，一般情况下不需要执行以下命令生成配置文件（除组件添加新配置功能外）
 
 ```
-php artisan g:config Admin
+php artisan hd:config Admin
 ```
 
 **文件说明**
@@ -79,7 +85,7 @@ function saveConfig(array $data = [], $name = 'config')
 
 系统会根据模块配置文件 `menus.php` 生成后台菜单项
 
-当 menus.php 文件不存在时，执行 `php artisan g:config Admin` 系统会为模块 Admin 创建菜单。
+当 menus.php 文件不存在时，执行 `php artisan hd:config Admin` 系统会为模块 Admin 创建菜单。
 
 **获取菜单**
 
@@ -98,13 +104,13 @@ function saveConfig(array $data = [], $name = 'config')
 系统根据 `Admin` 模块配置文件 `permission.php` 重新生成权限，执行以下命令会创建权限配置文件。
 
 ```
-php artisan g:permission Admin
+php artisan hd:permission Admin
 ```
 
 不指定模块时生成所有模块的权限表
 
 ```
-php artisan g:permission
+php artisan hd:permission
 ```
 
 > 文件存在时不会覆盖
@@ -134,7 +140,7 @@ name 指用于验证时的 `权限标识` ，可以使用任何字符定义。�
 
 ### 中间件
 
- [laravel-permission](https://github.com/spatie/laravel-permission#using-a-middleware) 组件提供了中间件功能，但处理不够灵活并对资源控制器支持不好。所以`georgie/laravel-module` 组件提供了中间件的功能扩展，你也可以使用  [laravel-permission](https://github.com/spatie/laravel-permission#installation)  中间件的所有功能。
+[laravel-permission](https://github.com/spatie/laravel-permission#using-a-middleware) 组件提供了中间件功能，但处理不够灵活并对资源控制器支持不好。所以`georgie/laravel-module` 组件提供了中间件的功能扩展，你也可以使用  [laravel-permission](https://github.com/spatie/laravel-permission#installation)  中间件的所有功能。
 
 以下都是对 `georgie/laravel-module`扩展中间件的说明，[laravel-permission](https://github.com/spatie/laravel-permission#using-a-middleware) 中间件使用请查看组件手册。
 
@@ -154,7 +160,7 @@ protected $routeMiddleware = [
 
 ### 站长特权
 
-配置文件 `config/georgie_config.php` 文件中定义站长使用的角色。
+配置文件 `config/hd_module.php` 文件中定义站长使用的角色。
 
 ```
 'webmaster' => 'webmaster'
@@ -270,7 +276,7 @@ Route::resource('role', 'RoleController')->middleware("permission:admin,resource
 执行以下命令系统会为 Article 模块创建 Category模型和对应的数据迁移文件。
 
 ```
-php artisan g:model Category Article
+php artisan hd:model Category Article
 ```
 
 ### 执行自动化构建
@@ -284,7 +290,7 @@ composer require georgie/laravel-autocreate
 下面是根据 Article 模块的 Category 模型生成业务框架，系统同时会创建模型表单处理器，请查看 https://github.com/houdunwang/laravel-autocreate 学习。
 
 ```
-php artisan g:autocreate Modules/Article/Entities/Category.php 文章
+php artisan hd:autocreate Modules/Article/Entities/Category.php 文章
 ```
 
 执行以下命令会创建下列文件
