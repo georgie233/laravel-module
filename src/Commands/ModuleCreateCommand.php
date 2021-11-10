@@ -12,7 +12,7 @@ class ModuleCreateCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'hd:module {name}';
+    protected $signature = 'g:module {name}';
 
     /**
      * The console command description.
@@ -45,7 +45,7 @@ class ModuleCreateCommand extends Command
         $this->call('module:make', [
             'name' => [$name],
         ]);
-        $this->call('hd:config', [
+        $this->call('g:config', [
             'name' => $name,
         ]);
 

@@ -14,7 +14,7 @@ class ModelCreateCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'hd:model {model} {module}';
+    protected $signature = 'g:model {model} {module}';
 
     /**
      * The console command description.

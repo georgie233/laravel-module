@@ -1,9 +1,4 @@
 <?php
-/** .-------------------------------------------------------------------
- * |      Site: www.hdcms.com  www.houdunren.com
- * |      Date: 2018/7/2 下午2:21
- * |    Author: 向军大叔 <2300071698@qq.com>
- * '-------------------------------------------------------------------*/
 namespace Georgie\Module\Traits;
 
 use Module;
@@ -30,7 +25,7 @@ trait ModuleService
             if ( ! in_array($module->name, $filter)) {
                 $modules[] = [
                     'name'   => $module->name,
-                    'title'  => \HDModule::config($module->name.'.config.name'),
+                    'title'  => \GModule::config($module->name.'.config.name'),
                     'module' => $module,
                 ];
             }

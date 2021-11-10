@@ -1,13 +1,8 @@
 <?php
-/** .-------------------------------------------------------------------
- * |      Site: www.hdcms.com  www.houdunren.com
- * |      Date: 2018/7/2 下午2:21
- * |    Author: 向军大叔 <2300071698@qq.com>
- * '-------------------------------------------------------------------*/
 namespace Georgie\Module\Traits;
 
 use Module;
-use HDModule;
+use GModule;
 /**
  * Class ModuleConfig
  *
@@ -35,9 +30,9 @@ trait ConfigService
 
     public function saveConfig(array $data = [], $name = 'config')
     {
-        $module = HDModule::currentModule();
-        $config = array_merge(HDModule::config($module.'.'.$name), $data);
-        $file   = HDModule::getModulePath().'/Config/'.$name.'.php';
+        $module = GModule::currentModule();
+        $config = array_merge(GModule::config($module.'.'.$name), $data);
+        $file   = GModule::getModulePath().'/Config/'.$name.'.php';
 
         return file_put_contents($file, '<?php return '.var_export($config, true).';');
     }

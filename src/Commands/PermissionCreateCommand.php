@@ -17,7 +17,7 @@ class PermissionCreateCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'hd:permission {name?}';
+    protected $signature = 'g:permission {name?}';
 
     /**
      * The console command description.
@@ -35,7 +35,7 @@ class PermissionCreateCommand extends Command
     {
         app()['cache']->forget('spatie.permission.cache');
         foreach ((array)$this->getModules() as $module) {
-            $config = \HDModule::config($module.'.permission');
+            $config = \GModule::config($module.'.permission');
             foreach ((array)$config as $group) {
                 foreach ((array)$group['permissions'] as $permission) {
                     if ( ! $this->permissionIsExists($permission)) {

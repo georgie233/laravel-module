@@ -1,9 +1,4 @@
 <?php
-/** .-------------------------------------------------------------------
- * |      Site: www.hdcms.com
- * |      Date: 2018/6/25 下午2:54
- * |    Author: 向军大叔 <2300071698@qq.com>
- * '-------------------------------------------------------------------*/
 
 namespace Georgie\Module;
 
@@ -18,7 +13,7 @@ use Georgie\Module\Commands\ConfigCreateCommand;
 class LaravelServiceProvider extends ServiceProvider
 {
     public $singletons = [
-        'hd-menu' => MenusService::class,
+        'g-menu' => MenusService::class,
     ];
 
     /**
@@ -42,7 +37,8 @@ class LaravelServiceProvider extends ServiceProvider
 
         //配置文件
         $this->publishes([
-            __DIR__.'/hd_module.php' => config_path('hd_module.php'),
+            __DIR__.'/georgie_config.php' => config_path('georgie_config.php'),
+            __DIR__.'/BaseController.php' => app_path('Http/Controllers/BaseController.php'),
         ]);
     }
 
@@ -53,7 +49,7 @@ class LaravelServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton('HDModule', function () {
+        $this->app->singleton('GModule', function () {
             return new Provider();
         });
     }

@@ -1,16 +1,7 @@
 <?php
+namespace Georgie\Module\Facade;
 
-namespace Georgie\Module;
-
-use Georgie\Module\Services\ConfigService;
-use Illuminate\Support\Facades\Facade;
-
-/**
- * Class Facade
- *
- * @package Georgie\Module
- */
-class Factory extends Facade
+class GModuleConfig extends Facade
 {
     /**
      * Get the registered name of the component.

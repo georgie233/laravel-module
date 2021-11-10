@@ -1,9 +1,4 @@
 <?php
-/** .-------------------------------------------------------------------
- * |      Site: www.hdcms.com  www.houdunren.com
- * |      Date: 2018/7/2 下午2:21
- * |    Author: 向军大叔 <2300071698@qq.com>
- * '-------------------------------------------------------------------*/
 namespace Georgie\Module\Traits;
 
 use Module;
@@ -50,7 +45,7 @@ trait PermissionService
     public function isWebMaster($guard = 'admin'): bool
     {
         $relation = auth($guard)->user()->roles();
-        $has      = $relation->where('roles.name', config('hd_module.webmaster'))->first();
+        $has      = $relation->where('roles.name', config('georgie_config.webmaster'))->first();
 
         return boolval($has);
     }
@@ -83,7 +78,7 @@ trait PermissionService
      */
     protected function filterByGuard($module, $guard)
     {
-        $data = $config = \HDModule::config($module.'.permission');
+        $data = $config = \GModule::config($module.'.permission');
         foreach ($config as $k => $group) {
             foreach ($group['permissions'] as $n => $permission) {
                 if ($permission['guard'] != $guard) {

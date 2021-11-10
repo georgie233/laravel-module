@@ -16,7 +16,7 @@ class BuildCreateCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'hd:build {model} {module} {model_title} {module_title}';
+    protected $signature = 'g:build {model} {module} {model_title} {module_title}';
 
     /**
      * The console command description.
@@ -50,7 +50,7 @@ class BuildCreateCommand extends Command
         if ($this->check()) {
             $this->setModelInstance();
             $this->setVar('MODEL_TITLE', $this->modelTitle);
-            $this->call('hd:handle', ['model' => $this->model, 'module' => $this->module]);
+            $this->call('g:handle', ['model' => $this->model, 'module' => $this->module]);
             $this->createController();
             $this->createRequest();
             $this->createRoute();

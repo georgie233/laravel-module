@@ -13,7 +13,7 @@ class ConfigCreateCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'hd:config {name}';
+    protected $signature = 'g:config {name}';
 
     /**
      * The console command description.
