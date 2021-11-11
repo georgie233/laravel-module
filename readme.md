@@ -1,10 +1,9 @@
 ## 组件介绍
+## 此组件开源可商业。
 
 通过使用模块来管理大型Laravel项目，模块就像一个laravel包非常方便的进行添加或移除。
 
-这个包是在 [houdunwang/laravel-modules](https://github.com/houdunwang/laravel-module) 的基础上进行二次开发，（用于个人使用）。
-
-[houdunwang/laravel-modules](https://github.com/houdunwang/laravel-module) 模块是在 [nwidart.com/laravel-modules](https://nwidart.com/laravel-modules/v3/advanced-tools/artisan-commands) 和  [laravel-permission](https://github.com/spatie/laravel-permission#installation)  组件基础上扩展了一些功能，所以需要先安装laravel-module，laravel-permission这两个组件。
+这个包是在 [nwidart.com/laravel-modules](https://nwidart.com/laravel-modules/v3/advanced-tools/artisan-commands) 和  [laravel-permission](https://github.com/spatie/laravel-permission#installation)  组件基础上扩展了一些功能，所以需要先安装laravel-module，laravel-permission这两个组件。
 
 > laravel-modules 和 laravel-permission 组件的功能都可以正常使用
 
