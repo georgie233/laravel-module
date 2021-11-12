@@ -53,7 +53,7 @@ class BaseController extends Controller
 
     public function saveFile($request,$name,$msg){
         $img = $request->file($name);
-        if (!$img) $this->backMsg($request,$msg);//没有上传文件
+        if (!$img) return $this->backMsg($request,$msg);//没有上传文件
         $ex=$img->getClientOriginalExtension();//扩展名
         $path=$img->getRealPath();//绝对路径
         $filename=date('Ymdhis').str_random(5).'.'.$ex;
