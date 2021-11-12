@@ -16,7 +16,7 @@ class AuthMiddleware
      * @return mixed
      */
     protected $exclude = [
-        'login'
+        'login','register'
     ];
     public function handle($request, Closure $next)
     {
