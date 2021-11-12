@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class BaseController extends Controller
 {
@@ -43,6 +44,22 @@ class BaseController extends Controller
             'list'=>$data,
             'count'=>$model->all()->count()
         ];
+    }
+
+    public function backMsg($request,$msg){
+        $request->flash();
+        return back()->with('danger',$msg);
+    }
+
+    public function saveFile($request,$name,$msg){
+        $img = $request->file($name);
+        if (!$img) $this->backMsg($request,$msg);//没有上传文件
+        $ex=$img->getClientOriginalExtension();//扩展名
+        $path=$img->getRealPath();//绝对路径
+        $filename=date('Ymdhis').str_random(5).'.'.$ex;
+        $b = \Storage::disk('public')->put($filename,file_get_contents($path));
+        if (!$b)return $this->backMsg($request,'上传失败');
+        return \Storage::disk('public')->url($filename);
     }
 
     public function isMobile()
