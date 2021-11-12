@@ -9,6 +9,7 @@ class BaseController extends Controller
 {
     //
     protected $isAjax = false;
+    protected $error = [];
     public function __construct()
     {
         $h = request()->header('Accept');
@@ -18,7 +19,27 @@ class BaseController extends Controller
         }
     }
 
+    public function getError(){
+        return $this->error;
+    }
+    public function getErrorCode(){
+        return $this->error[0];
+    }
+    public function getErrorMsg(){
+        return $this->error[1];
+    }
+
+    public function setError($code,$msg){
+        $this->error[0] = $code;
+        $this->error[1] = $msg;
+    }
+
     public function responseSuccess($data){
+        if ($this->getError()){
+            //有错误拦截
+            return $this->responseJson([],$this->getErrorMsg(),$this->getErrorCode());
+            $this->error = [];
+        }
         return response()->json([
             'code' => 200,
             'message' => '成功',
@@ -32,8 +53,25 @@ class BaseController extends Controller
             'data' => [],
         ], 200);
     }
+    public function responseJson($data,$msg,$code = 200){
+        return response()->json([
+            'code' => $code,
+            'message' => $msg,
+            'data' => $data,
+        ], 200);
+    }
 
     public function handleAjaxIndex($request,$model){
+
+        $search = [];
+        foreach  ($request->all() as $key=>$item){
+            if (stristr($key,'search_')){
+                $search[str_replace('search_','',$key)] = $item;
+            }
+        }
+        if (count($search))
+            return $this->handleAjaxSearchIndex($request,$model,$search);
+
         if (isset($request->start) || isset($request->len)){
             $data = $model->offset($request->start??0)->limit($request->len??10)->get();
         }
@@ -42,8 +80,26 @@ class BaseController extends Controller
         }
         return [
             'list'=>$data,
-            'count'=>$model->all()->count()
+            'count'=>$model->count()
         ];
+    }
+    public function handleAjaxSearchIndex($request,$model,$search){
+        try {
+            if (isset($request->start) || isset($request->len)){
+                $data = $model->where($search)->offset($request->start??0)->limit($request->len??10)->get();
+            }
+            else {
+                $data = $model->where($search)->get();
+            }
+            return [
+                'list'=>$data,
+                'count'=>$model->where($search)->count()
+            ];
+        }catch (\Exception $exception){
+            if ($exception->getCode() == '42S22'){
+                return $this->setError(400,'请求参数有误');
+            }
+        }
     }
 
     public function backMsg($request,$msg){
