@@ -40,6 +40,7 @@ class LaravelServiceProvider extends ServiceProvider
             __DIR__.'/georgie_config.php' => config_path('georgie_config.php'),
             __DIR__.'/BaseController.php' => app_path('Http/Controllers/BaseController.php'),
             __DIR__.'/AcceptHeader.php' => app_path('Http/Middleware/AcceptHeader.php'),
+            __DIR__.'/AuthMiddleware.php' => app_path('Http/Middleware/AuthMiddleware.php'),
         ]);
     }
 
