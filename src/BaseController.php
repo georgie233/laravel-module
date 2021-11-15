@@ -171,10 +171,15 @@ class BaseController extends Controller
     }
 
     public function getUser(){
-        if ($this->isAjax){
+        try {
+            if ($this->isAjax){
 //            $token = \request()->headers->get('Authorization');
 //            $token = str_replace("Bearer ","",$token);
 //            return (new LoginToken())->getModel($token);
-        }else return Auth::user();
+            }else return Auth::user();
+        }catch (\Exception $exception){
+            if ($this->isAjax) return $this->responseJson([],'服务器错误:获取不到用户信息',400);
+            else  dd("服务器错误:获取不到用户信息");
+        }
     }
 }
