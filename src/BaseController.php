@@ -119,20 +119,35 @@ class BaseController extends Controller
 
     public function backMsg($request, $msg)
     {
-        $request->flash();
-        return back()->with('danger', $msg);
+        if ($this->isAjax){
+            return $this->responseJson([],$msg,400);
+        }else{
+            $request->flash();
+            return back()->with('danger', $msg);
+        }
     }
 
-    public function saveFile($request, $name, $msg)
-    {
+    public function getRequesFile($request,$name){
         $img = $request->file($name);
+        return $img;
+    }
+
+    public function saveFile($request, $name, $msg='')
+    {
+        $img = $this->getRequesFile($request,$name);
         if (!$img) return $this->backMsg($request, $msg);//没有上传文件
         $ex = $img->getClientOriginalExtension();//扩展名
         $path = $img->getRealPath();//绝对路径
         $filename = date('Ymdhis') . str_random(5) . '.' . $ex;
         $b = \Storage::disk('public')->put($filename, file_get_contents($path));
-        if (!$b) return $this->backMsg($request, '上传失败');
+        if (!$b) return $this->backMsg($request, '文件上传失败');
         return \Storage::disk('public')->url($filename);
+    }
+
+    public function delFile($url){
+        $disk = \Storage::disk('public');
+        $path = str_replace($disk->url(''),'',$url);
+        return $disk->delete($path);
     }
 
     public function isMobile()
