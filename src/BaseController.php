@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\LoginToken;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class BaseController extends Controller
@@ -166,5 +168,13 @@ class BaseController extends Controller
         } else {
             return false;
         }
+    }
+
+    public function getUser(){
+        if ($this->isAjax){
+//            $token = \request()->headers->get('Authorization');
+//            $token = str_replace("Bearer ","",$token);
+//            return (new LoginToken())->getModel($token);
+        }else return Auth::user();
     }
 }
