@@ -57,6 +57,10 @@ class BaseController extends Controller
         ], 200);
     }
 
+    public function responseError($msg='',$code=403){
+        return $this->responseJson([],$msg,$code);
+    }
+
     public function responseIllegal()
     {
         return response()->json([
@@ -119,35 +123,40 @@ class BaseController extends Controller
 
     public function backMsg($request, $msg)
     {
-        if ($this->isAjax){
-            return $this->responseJson([],$msg,400);
-        }else{
+        if ($this->isAjax) {
+            return $this->responseJson([], $msg, 400);
+        } else {
             $request->flash();
             return back()->with('danger', $msg);
         }
     }
 
-    public function getRequesFile($request,$name){
+    public function getRequesFile($request, $name)
+    {
         $img = $request->file($name);
         return $img;
     }
 
-    public function saveFile($request, $name, $msg='')
+    public function saveFile($request, $name, $msg = '', $prefix = '')
     {
-        $img = $this->getRequesFile($request,$name);
+        $img = $this->getRequesFile($request, $name);
         if (!$img) return $this->backMsg($request, $msg);//没有上传文件
         $ex = $img->getClientOriginalExtension();//扩展名
         $path = $img->getRealPath();//绝对路径
         $filename = date('Ymdhis') . str_random(5) . '.' . $ex;
-        $b = \Storage::disk('public')->put($filename, file_get_contents($path));
+        $b = \Storage::disk('public')->put($prefix . '/' . $filename, file_get_contents($path));
         if (!$b) return $this->backMsg($request, '文件上传失败');
-        return \Storage::disk('public')->url($filename);
+        $l = \Storage::disk('public')->url('');
+        return $l . ($prefix ? $prefix . '/' : '') . $filename;
     }
 
-    public function delFile($url){
+    public function delFile($url, $prefix = '')
+    {
         $disk = \Storage::disk('public');
-        $path = str_replace($disk->url(''),'',$url);
-        return $disk->delete($path);
+        $path = str_replace($disk->url(''), '', $url);
+        echo(($prefix ? $prefix . '/' : $prefix) . $path);
+        dd($disk->delete(($prefix ? $prefix . '/' : $prefix) . $path));
+        return $disk->delete(($prefix ? $prefix . '/' : $prefix) . $path);
     }
 
     public function isMobile()
@@ -185,15 +194,16 @@ class BaseController extends Controller
         }
     }
 
-    public function getUser(){
+    public function getUser()
+    {
         try {
-            if ($this->isAjax){
+            if ($this->isAjax) {
 //            $token = \request()->headers->get('Authorization');
 //            $token = str_replace("Bearer ","",$token);
 //            return (new LoginToken())->getModel($token);
-            }else return Auth::user();
-        }catch (\Exception $exception){
-            if ($this->isAjax) return $this->responseJson([],'服务器错误:获取不到用户信息',400);
+            } else return Auth::user();
+        } catch (\Exception $exception) {
+            if ($this->isAjax) return $this->responseJson([], '服务器错误:获取不到用户信息', 400);
             else  dd("服务器错误:获取不到用户信息");
         }
     }
