@@ -9,7 +9,11 @@
 
 ## 安装组件
 
-    composer require georgie/laravel-module
+    laravel5 请使用：
+    composer require georgie/laravel-module 1.0
+    
+    laravel8 请使用: 
+    composer require georgie/laravel-module 2.0
     
     php artisan vendor:publish --provider="Nwidart\Modules\LaravelModulesServiceProvider"
     
