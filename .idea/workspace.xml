@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8afabfbd-0e8d-41d5-b675-f43a74898f98" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/AcceptHeader.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BaseController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/BaseController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/LaravelServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/LaravelServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
