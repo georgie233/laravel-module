@@ -50,6 +50,8 @@ class ModuleCreateCommand extends Command
         ]);
 
         //创建前端文件
+        $servicePath =  \Module::getPath('Module')."/{$name}/Service";
+        mkdir ($servicePath,0777,true);
         $jsPath = \Module::getPath('Module')."/{$name}/Resources/assets/js";
         copy(__DIR__.'/../../resources/js/bootstrap.js',$jsPath.'/bootstrap.js');
         copy(__DIR__.'/../../resources/js/app.js',$jsPath.'/app.js');
