@@ -46,7 +46,7 @@
 下面的命令是安装 `Admin` 模块
 
 ```
-php artisan hd:module Admin
+php artisan g:module Admin
 ```
 创建模块会同时执行以下操作：
 
@@ -58,7 +58,7 @@ php artisan hd:module Admin
 新建模块时系统会自动创建配置，一般情况下不需要执行以下命令生成配置文件（除组件添加新配置功能外）
 
 ```
-php artisan hd:config Admin
+php artisan g:config Admin
 ```
 
 **文件说明**
@@ -88,7 +88,7 @@ function saveConfig(array $data = [], $name = 'config')
 
 系统会根据模块配置文件 `menus.php` 生成后台菜单项
 
-当 menus.php 文件不存在时，执行 `php artisan hd:config Admin` 系统会为模块 Admin 创建菜单。
+当 menus.php 文件不存在时，执行 `php artisan g:config Admin` 系统会为模块 Admin 创建菜单。
 
 **获取菜单**
 
@@ -107,13 +107,13 @@ function saveConfig(array $data = [], $name = 'config')
 系统根据 `Admin` 模块配置文件 `permission.php` 重新生成权限，执行以下命令会创建权限配置文件。
 
 ```
-php artisan hd:permission Admin
+php artisan g:permission Admin
 ```
 
 不指定模块时生成所有模块的权限表
 
 ```
-php artisan hd:permission
+php artisan g:permission
 ```
 
 > 文件存在时不会覆盖
@@ -163,7 +163,7 @@ protected $routeMiddleware = [
 
 ### 站长特权
 
-配置文件 `config/hd_module.php` 文件中定义站长使用的角色。
+配置文件 `config/georgie_module.php` 文件中定义站长使用的角色。
 
 ```
 'webmaster' => 'webmaster'
@@ -279,7 +279,7 @@ Route::resource('role', 'RoleController')->middleware("permission:admin,resource
 执行以下命令系统会为 Article 模块创建 Category模型和对应的数据迁移文件。
 
 ```
-php artisan hd:model Category Article
+php artisan g:model Category Article
 ```
 
 ### 执行自动化构建
@@ -293,7 +293,7 @@ composer require georgie/laravel-autocreate
 下面是根据 Article 模块的 Category 模型生成业务框架，系统同时会创建模型表单处理器，请查看 https://github.com/houdunwang/laravel-autocreate 学习。
 
 ```
-php artisan hd:autocreate Modules/Article/Entities/Category.php 文章
+php artisan g:autocreate Modules/Article/Entities/Category.php 文章
 ```
 
 执行以下命令会创建下列文件
